@@ -960,6 +960,7 @@ class Trainer(TrainerIOMixin,
             else:
                 self.__set_random_port()
                 model.share_memory()
+                self.model = model
                 mp.spawn(self.ddp_train, nprocs=self.num_gpus, args=(model,))
 
         # 1 gpu or dp option triggers training using DP module
@@ -1188,6 +1189,7 @@ class Trainer(TrainerIOMixin,
             trainer = Trainer()
             trainer.test(model)
         """
+        import pdb; pdb.set_trace()
         self.testing = True
         if model is not None:
             self.fit(model)
