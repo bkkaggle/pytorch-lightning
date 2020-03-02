@@ -959,6 +959,7 @@ class Trainer(TrainerIOMixin,
                 self.ddp_train(task, model)
             else:
                 self.__set_random_port()
+                model.share_memory()
                 mp.spawn(self.ddp_train, nprocs=self.num_gpus, args=(model,))
 
         # 1 gpu or dp option triggers training using DP module
